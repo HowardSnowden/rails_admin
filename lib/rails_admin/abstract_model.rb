@@ -180,8 +180,10 @@ module RailsAdmin
 
       def build_statement_for_datetime_or_timestamp
         start_date, end_date = get_filtering_duration
-        start_date = start_date.to_time.try(:beginning_of_day) if start_date
-        end_date = end_date.to_time.try(:end_of_day) if end_date
+        unless @operator == "between"
+          start_date = start_date.to_time.try(:beginning_of_day) if start_date
+          end_date = end_date.to_time.try(:end_of_day) if end_date
+        end
         range_filter(start_date, end_date)
       end
 
