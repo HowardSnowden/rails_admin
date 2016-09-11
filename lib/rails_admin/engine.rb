@@ -7,6 +7,7 @@ require 'rack-pjax'
 require 'rails'
 require 'rails_admin'
 require 'remotipart'
+require 'hamlit-rails'
 
 module RailsAdmin
   class Engine < Rails::Engine
