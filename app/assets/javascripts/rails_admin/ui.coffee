@@ -99,4 +99,14 @@ $(document).on 'click',  "#remove_filter",(event) ->
   $("#filters_box").html("")
   $("hr.filters_box").hide()
   $(this).parent().siblings("input[type='search']").val("")
-  $(this).parents("form").submit()  
+  $(this).parents("form").submit()
+
+# For small screens, allow to toggle side menu
+$(document).ready ->
+  $('.dropdown-header').off('click.rails_admin').on 'click.rails_admin', (event) ->
+    if $(window).width() < 768
+      $(this).nextAll('ul,li').toggle()
+
+$(window).off('resize.rails_admin').on 'resize.rails_admin', (event) ->
+  if $(window).width() >= 768
+    $('.dropdown-header').nextAll('ul,li').show()

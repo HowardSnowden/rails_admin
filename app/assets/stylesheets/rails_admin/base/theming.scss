@@ -339,3 +339,31 @@ body.rails_admin {
     }
   }
 }
+
+// Font-size for .page-header h1 tag was a little bit too big
+#block-tables h2,
+.page-header h1 {
+  font-size: 2em; // normalize.css default size
+}
+
+// Force baseline alignment when th are multilines
+.table {
+  & > thead > tr > th {
+    &.shrink,
+    &.header {
+      vertical-align: baseline;
+    }
+  }
+}
+
+// For small screens, allow to toggle side menu (see: app/assets/javascripts/rails_admin/ui.coffee)
+@media screen and (max-width: $grid-float-breakpoint-max) {
+  .dropdown-header {
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      background: $gray-lighter;
+    }
+  }
+}
