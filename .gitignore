@@ -4,6 +4,7 @@
 *.swp
 .bundle
 .idea/
+.ruby-version
 .rvmrc
 .yardoc
 /.emacs.desktop
