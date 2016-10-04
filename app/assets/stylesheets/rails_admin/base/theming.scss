@@ -349,21 +349,37 @@ body.rails_admin {
 // Force baseline alignment when th are multilines
 .table {
   & > thead > tr > th {
-    &.shrink,
-    &.header {
-      vertical-align: baseline;
-    }
+    vertical-align: baseline;
   }
 }
 
 // For small screens, allow to toggle side menu (see: app/assets/javascripts/rails_admin/ui.coffee)
+$fa-bars: "\f0c9";
 @media screen and (max-width: $grid-float-breakpoint-max) {
-  .dropdown-header {
-    cursor: pointer;
-    &:hover,
-    &:active,
-    &:focus {
-      background: $gray-lighter;
+  body.rails_admin {
+    .sidebar-nav {
+      & .dropdown-header {
+        padding-bottom: 9px;
+        cursor: pointer;
+        &:hover,
+        &:active,
+        &:focus {
+          background: $gray-lighter;
+        }
+        &:after {
+          content: $fa-bars;
+          display: inline-block;
+          margin-right: 15px;
+          margin-top: 4px;
+          float: right;
+          vertical-align: baseline;
+          font: normal normal normal 14px/1 FontAwesome;
+          font-size: inherit;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      }
     }
   }
 }
