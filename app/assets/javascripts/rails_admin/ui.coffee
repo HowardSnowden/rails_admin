@@ -102,7 +102,7 @@ $(document).on 'click',  "#remove_filter",(event) ->
   $(this).parents("form").submit()
 
 # For small screens, allow to toggle side menu
-$(document).ready ->
+$(document).on 'rails_admin.dom_ready', ->
   $('.dropdown-header').off('click.rails_admin').on 'click.rails_admin', (event) ->
     if $(window).width() < 768
       $(this).nextAll('ul,li').toggle()
