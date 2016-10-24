@@ -64,7 +64,7 @@ module RailsAdmin
       method = @objects.respond_to?(:find_each) ? :find_each : :each
 
       CSV.generate(generator_options) do |csv|
-        csv << generate_csv_header unless options[:skip_header]
+        csv << generate_csv_header unless options[:skip_header] || @fields.nil?
 
         @objects.send(method) do |object|
           csv << generate_csv_row(object)
