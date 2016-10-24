@@ -350,6 +350,7 @@ body.rails_admin {
 // Do not break on mobile when table is too wide
 #bulk_form {
   overflow-x: auto;
+  padding-right: 15px;
 }
 
 // Force baseline alignment when th are multilines
