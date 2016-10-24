@@ -340,10 +340,16 @@ body.rails_admin {
   }
 }
 
-// Font-size for .page-header h1 tag was a little bit too big
+// Some font-size are a little bit too big
 #block-tables h2,
-.page-header h1 {
+.page-header h1,
+.modal-header-title {
   font-size: 2em; // normalize.css default size
+}
+
+// Do not break on mobile when table is too wide
+#bulk_form {
+  overflow-x: auto;
 }
 
 // Force baseline alignment when th are multilines
