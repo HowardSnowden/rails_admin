@@ -29,6 +29,13 @@ module RailsAdmin
       app.config.middleware.use Rack::Pjax
     end
 
+    config.to_prepare do
+      if Rails.env.development?
+        RailsAdmin::Config.reset
+        load "#{Rails.root}/config/initializers/rails_admin.rb"
+      end
+    end
+
     rake_tasks do
       Dir[File.join(File.dirname(__FILE__), '../tasks/*.rake')].each { |f| load f }
     end
