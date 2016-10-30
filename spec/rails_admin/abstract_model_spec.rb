@@ -37,21 +37,22 @@ describe RailsAdmin::AbstractModel do
     context 'on datetimes with :en locale' do
       before do
         I18n.locale = :en
-        FactoryGirl.create(:field_test, datetime_field: Time.local(2012, 1, 1, 23, 59, 59))
-        FactoryGirl.create(:field_test, datetime_field: Time.local(2012, 1, 2, 0, 0, 0))
-        FactoryGirl.create(:field_test, datetime_field: Time.local(2012, 1, 3, 23, 59, 59))
+        FactoryGirl.create(:field_test, datetime_field: Time.zone.local(2012, 1, 1, 23, 59, 59))
+        FactoryGirl.create(:field_test, datetime_field: Time.zone.local(2012, 1, 2, 0, 0, 0))
+        FactoryGirl.create(:field_test, datetime_field: Time.zone.local(2012, 1, 3, 23, 59, 59))
 
         # TODO: Mongoid 3.0.0 mysteriously expands the range of inclusion slightly...
         if defined?(Mongoid) && Mongoid::VERSION >= '3.0.0'
-          FactoryGirl.create(:field_test, datetime_field: Time.local(2012, 1, 4, 0, 0, 1))
+          FactoryGirl.create(:field_test, datetime_field: Time.zone.local(2012, 1, 4, 0, 0, 1))
         else
-          FactoryGirl.create(:field_test, datetime_field: Time.local(2012, 1, 4, 0, 0, 0))
+          FactoryGirl.create(:field_test, datetime_field: Time.zone.local(2012, 1, 4, 0, 0, 0))
         end
       end
 
       it 'lists elements within outbound limits' do
-        expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', 'January 02, 2012 12:00', 'January 03, 2012 12:00'], o: 'between'}}}).count).to eq(2)
-        expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', 'January 02, 2012 12:00', 'January 02, 2012 12:00'], o: 'between'}}}).count).to eq(1)
+        # NOTE: lib/rails_admin/config/fields/types/datetime.rb --> seconds are ignored
+        expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', 'January 02, 2012 00:00', 'January 03, 2012 23:59'], o: 'between'}}}).count).to eq(1)
+        expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', 'January 02, 2012 00:00', 'January 04, 2012 00:00'], o: 'between'}}}).count).to eq(3)
         expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', 'January 03, 2012 12:00', ''], o: 'between'}}}).count).to eq(2)
         expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['', '', 'January 02, 2012 12:00'], o: 'between'}}}).count).to eq(2)
         expect(@abstract_model.all(filters: {'datetime_field' => {'1' => {v: ['January 02, 2012 12:00'], o: 'default'}}}).count).to eq(1)
