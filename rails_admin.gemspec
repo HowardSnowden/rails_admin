@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   # If you add a dependency, please maintain alphabetical order
   spec.add_dependency 'builder', '~> 3.1'
   spec.add_dependency 'coffee-rails', '~> 4.0'
-  spec.add_dependency 'font-awesome-rails', ['>= 3.0', '< 5']
+  spec.add_dependency 'font-awesome-sass', '~> 4.7.0'
   spec.add_dependency 'hamlit-rails', '~> 0.1'
   spec.add_dependency 'jquery-rails', ['>= 3.0', '< 5']
   spec.add_dependency 'jquery-ui-rails', '~> 5.0'
@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', ['>= 4.0', '< 6']
   spec.add_dependency 'remotipart', '~> 1.3'
   spec.add_dependency 'sassc-rails', '~> 1.3'
+  spec.add_dependency 'sass-rails'
   spec.add_dependency 'bootstrap-sass', '~> 3.3.6'
   spec.add_dependency 'twitter-typeahead-rails', '~> 0.11.1'
   spec.add_dependency 'bootstrap-datetimepicker-sass', '~> 4.17.43'
