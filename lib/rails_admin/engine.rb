@@ -8,6 +8,8 @@ require 'rails'
 require 'rails_admin'
 require 'remotipart'
 require 'hamlit-rails'
+require 'bootstrap-sass'
+require 'twitter-typeahead-rails'
 
 module RailsAdmin
   class Engine < Rails::Engine
