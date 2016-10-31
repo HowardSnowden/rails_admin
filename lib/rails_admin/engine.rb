@@ -10,6 +10,7 @@ require 'remotipart'
 require 'hamlit-rails'
 require 'bootstrap-sass'
 require 'twitter-typeahead-rails'
+require 'bootstrap_datetimepicker_sass'
 
 module RailsAdmin
   class Engine < Rails::Engine

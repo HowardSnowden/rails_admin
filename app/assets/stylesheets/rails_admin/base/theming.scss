@@ -390,3 +390,8 @@ $fa-bars: "\f0c9";
     }
   }
 }
+
+// Keep Datetime Picker over Navbar
+.bootstrap-datetimepicker-widget {
+  z-index: $zindex-navbar-fixed + 1;
+}
