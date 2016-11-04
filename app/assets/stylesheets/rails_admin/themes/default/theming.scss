@@ -9,3 +9,12 @@
 
   body { background-color: $link-color; }
 */
+
+@import "bootswatch/paper/bootswatch";
+
+// Some font-size are a little bit too big
+#block-tables h2,
+.page-header h1,
+.modal-header-title {
+  font-size: 2em; // normalize.css default size
+}

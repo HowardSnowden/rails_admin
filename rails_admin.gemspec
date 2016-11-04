@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'sassc-rails', '~> 1.3'
   spec.add_dependency 'sass-rails'
   spec.add_dependency 'bootstrap-sass', '~> 3.3.6'
+  spec.add_dependency 'bootswatch-rails', '~> 3.3.5'
   spec.add_dependency 'twitter-typeahead-rails', '~> 0.11.1'
   spec.add_dependency 'bootstrap-datetimepicker-sass', '~> 4.17.43'
   spec.add_development_dependency 'bundler', '~> 1.0'

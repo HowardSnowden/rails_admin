@@ -33,12 +33,14 @@
   theme = ENV['RAILS_ADMIN_THEME'] || :default
 %>
 
+@import "bootstrap-sprockets";
+
 /***  Variables  ***/
 
 @import "rails_admin/custom/variables";
-@import "bootstrap/variables";
-@import "rails_admin/base/variables";
 @import "rails_admin/themes/<%= theme %>/variables";
+@import "rails_admin/base/variables";
+@import "bootstrap/variables";
 
 /***  Mixins  ***/
 

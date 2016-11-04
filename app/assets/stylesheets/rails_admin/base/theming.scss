@@ -340,13 +340,6 @@ body.rails_admin {
   }
 }
 
-// Some font-size are a little bit too big
-#block-tables h2,
-.page-header h1,
-.modal-header-title {
-  font-size: 2em; // normalize.css default size
-}
-
 // Do not break on mobile when table is too wide
 #bulk_form {
   overflow-x: auto;
