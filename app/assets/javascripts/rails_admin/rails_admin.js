@@ -6,6 +6,8 @@
 //=  require jquery-ui/autocomplete
 //=  require moment
 //=  require moment/fr
+//=  require twitter/typeahead
+//=  require bootstrap-sprockets
 //=  require bootstrap-datetimepicker
 //=  require rails_admin/jquery.colorpicker
 //=  require rails_admin/ra.filter-box
@@ -16,7 +18,6 @@
 //=  require jquery_nested_form
 //=  require rails_admin/ra.nested-form-hooks
 //=  require rails_admin/ra.i18n
-//=  require rails_admin/bootstrap/bootstrap
 //=  require rails_admin/ra.widgets
 //=  require rails_admin/ui
 //=  require rails_admin/custom/ui
