@@ -14,7 +14,19 @@
 
 // Some font-size are a little bit too big
 #block-tables h2,
+.content h4,
 .page-header h1,
 .modal-header-title {
-  font-size: 2em; // normalize.css default size
+  font-size: 2rem;
+}
+
+// Error and dropdown were too close
+.text-danger {
+  padding-left: 5px;
+}
+
+// Title removed, so spaced a little the breadcrumb and alert divs
+.breadcrumb,
+.alert {
+  margin-top: 15px;
 }
