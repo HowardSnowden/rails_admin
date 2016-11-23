@@ -102,11 +102,20 @@ $(document).on 'click',  "#remove_filter",(event) ->
   $(this).parents("form").submit()
 
 # For small screens, allow to toggle side menu
-$(document).on 'rails_admin.dom_ready', ->
-  $('.dropdown-header').off('click.rails_admin').on 'click.rails_admin', (event) ->
-    if $(window).width() < 768
-      $(this).nextAll('ul,li').toggle()
+$(document).on 'click', '.dropdown-header', (event) ->
+  if $(window).width() < 768
+    $(this).nextAll('ul,li').toggle()
 
 $(window).off('resize.rails_admin').on 'resize.rails_admin', (event) ->
   if $(window).width() >= 768
     $('.dropdown-header').nextAll('ul,li').show()
+
+# Make link click feel more like native app navigation
+NOT_FOUND = -1
+$(document).on 'click', 'a.pjax', (event) ->
+  active_link = $('.nav.nav-pills li.active a')
+  if $(this).attr('href').indexOf(active_link.attr('href')) == NOT_FOUND
+    active_link.parent().removeClass('active');
+
+$(document).on 'click', '.nav.nav-pills li', (event) ->
+  $(this).addClass('active');
