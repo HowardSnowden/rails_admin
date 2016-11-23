@@ -388,3 +388,10 @@ $fa-bars: "\f0c9";
 .bootstrap-datetimepicker-widget {
   z-index: $zindex-navbar-fixed + 1;
 }
+
+// Browser validations in chrome need to have the select focusable
+select[required] {
+  display: inline-block !important;
+  opacity: 0;
+  position: absolute;
+}
