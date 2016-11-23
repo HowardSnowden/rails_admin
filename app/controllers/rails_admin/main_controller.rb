@@ -9,7 +9,6 @@ module RailsAdmin
     before_action :get_model, except: RailsAdmin::Config::Actions.all(:root).collect(&:action_name)
     before_action :get_object, only: RailsAdmin::Config::Actions.all(:member).collect(&:action_name)
     before_action :check_for_cancel
-    after_action :mark_for_garbage_collect
 
     RailsAdmin::Config::Actions.all.each do |action|
       class_eval <<-EOS, __FILE__, __LINE__ + 1
@@ -39,17 +38,6 @@ module RailsAdmin
     end
 
   private
-
-    def mark_for_garbage_collect
-      if action_name == 'export' && request.method == 'POST'
-        ObjectSpace.garbage_collect
-      end
-
-      if Rails.env.development?
-        current_class = @abstract_model.model_name.constantize
-        logger.debug "#{current_class}: #{ObjectSpace.each_object(current_class).count}"
-      end
-    end
 
     def get_layout
       "rails_admin/#{request.headers['X-PJAX'] ? 'pjax' : 'application'}"
