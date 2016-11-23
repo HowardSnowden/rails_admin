@@ -59,17 +59,5 @@ module RailsAdmin
     def rails_admin_controller?
       true
     end
-
-    rescue_from RailsAdmin::ObjectNotFound do
-      flash[:error] = I18n.t('admin.flash.object_not_found', model: @model_name, id: params[:id])
-      params[:action] = 'index'
-      index
-    end
-
-    rescue_from RailsAdmin::ModelNotFound do
-      flash[:error] = I18n.t('admin.flash.model_not_found', model: @model_name)
-      params[:action] = 'dashboard'
-      dashboard
-    end
   end
 end
