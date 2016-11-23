@@ -9,6 +9,7 @@ module RailsAdmin
     before_action :get_model, except: RailsAdmin::Config::Actions.all(:root).collect(&:action_name)
     before_action :get_object, only: RailsAdmin::Config::Actions.all(:member).collect(&:action_name)
     before_action :check_for_cancel
+    after_action :mark_for_garbage_collect
 
     RailsAdmin::Config::Actions.all.each do |action|
       class_eval <<-EOS, __FILE__, __LINE__ + 1
@@ -38,6 +39,17 @@ module RailsAdmin
     end
 
   private
+
+    def mark_for_garbage_collect
+      if action_name == 'export' && request.method == 'POST'
+        ObjectSpace.garbage_collect
+      end
+
+      if Rails.env.development?
+        current_class = @abstract_model.model_name.constantize
+        logger.debug "#{current_class}: #{ObjectSpace.each_object(current_class).count}"
+      end
+    end
 
     def get_layout
       "rails_admin/#{request.headers['X-PJAX'] ? 'pjax' : 'application'}"
@@ -139,6 +151,24 @@ module RailsAdmin
       action = params[:current_action].in?(%w(create update)) ? params[:current_action] : 'edit'
       @association = source_model_config.send(action).fields.detect { |f| f.name == params[:associated_collection].to_sym }.with(controller: self, object: source_object)
       @association.associated_collection_scope
+    end
+
+    rescue_from RailsAdmin::ObjectNotFound do
+      flash[:error] = I18n.t('admin.flash.object_not_found', model: @model_name, id: params[:id])
+      params[:action] = 'index'
+      index
+    end
+
+    rescue_from RailsAdmin::ModelNotFound do
+      flash[:error] = I18n.t('admin.flash.model_not_found', model: @model_name)
+      params[:action] = 'dashboard'
+      dashboard
+    end
+
+    rescue_from ::Pundit::NotAuthorizedError do
+      flash[:error] = I18n.t('admin.flash.not_allowed')
+      params[:action] = 'dashboard'
+      dashboard
     end
   end
 end
