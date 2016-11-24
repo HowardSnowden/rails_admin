@@ -114,7 +114,8 @@ $(window).off('resize.rails_admin').on 'resize.rails_admin', (event) ->
 NOT_FOUND = -1
 $(document).on 'click', 'a.pjax', (event) ->
   active_link = $('.nav.nav-pills li.active a')
-  if $(this).attr('href').indexOf(active_link.attr('href')) == NOT_FOUND
+  pathname = active_link.attr('href')?.replace(location.origin, '')
+  if $(this).attr('href').indexOf(pathname) == NOT_FOUND
     active_link.parent().removeClass('active');
 
 $(document).on 'click', '.nav.nav-pills li', (event) ->
