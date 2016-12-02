@@ -120,3 +120,14 @@ $(document).on 'click', '.nav.nav-pills li', (event) ->
 # Infinite pjax timeout
 $(document).on 'pjax:timeout', ->
   false
+
+# Load progress bar only if wait time is over 500ms
+PROGRESS_BAR_TIMEOUT = null
+$(document).on 'pjax:send', ->
+  PROGRESS_BAR_TIMEOUT = setTimeout(->
+    NProgress.start()
+  , 500)
+
+$(document).on 'pjax:complete', ->
+  NProgress.done()
+  clearTimeout(PROGRESS_BAR_TIMEOUT)

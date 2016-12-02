@@ -10,7 +10,6 @@
 //=  require bootstrap-sprockets
 //=  require bootstrap-datetimepicker
 //=  require nprogress
-//=  require nprogress-pjax
 //=  require rails_admin/jquery.colorpicker
 //=  require rails_admin/ra.filter-box
 //=  require rails_admin/ra.filtering-multiselect
