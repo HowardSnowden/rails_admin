@@ -155,7 +155,7 @@ module RailsAdmin
       dashboard
     end
 
-    rescue_from ::Pundit::NotAuthorizedError do
+    rescue_from ::Pundit::NotAuthorizedError, ActiveRecord::InvalidForeignKey do
       flash[:error] = I18n.t('admin.flash.not_allowed')
       params[:action] = 'dashboard'
       @status_code = :forbidden
