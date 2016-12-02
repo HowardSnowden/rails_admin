@@ -395,3 +395,9 @@ select[required] {
   opacity: 0;
   position: absolute;
 }
+
+// Position the spinner at the bottom
+#nprogress .spinner {
+  top: inherit;
+  bottom:15px;
+}

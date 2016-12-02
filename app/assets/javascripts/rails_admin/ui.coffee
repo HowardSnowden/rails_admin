@@ -1,4 +1,5 @@
 $ = jQuery
+PJAX_TIMEOUT = 2 * 1000
 
 $(document).on "click", "#list input.toggle", ->
   $("#list [name='bulk_ids[]']").prop "checked", $(this).is(":checked")
@@ -11,7 +12,7 @@ $(document).on 'click', '.pjax', (event) ->
     $.pjax
       container: $(this).data('pjax-container') || '[data-pjax-container]'
       url: $(this).data('href') || $(this).attr('href')
-      timeout: 2000
+      timeout: PJAX_TIMEOUT
   else if $(this).data('href') # not a native #href, need some help
     window.location = $(this).data('href')
 
@@ -21,13 +22,7 @@ $(document).on 'submit', '.pjax-form', (event) ->
     $.pjax
       container: $(this).data('pjax-container') || '[data-pjax-container]'
       url: this.action + (if (this.action.indexOf('?') != -1) then '&' else '?') + $(this).serialize()
-      timeout: 2000
-
-$(document)
-  .on 'pjax:start', ->
-    $('#loading').show()
-  .on 'pjax:end', ->
-    $('#loading').hide()
+      timeout: PJAX_TIMEOUT
 
 $(document).on 'click', '[data-target]', ->
   if !$(this).hasClass('disabled')
@@ -102,12 +97,13 @@ $(document).on 'click',  "#remove_filter",(event) ->
   $(this).parents("form").submit()
 
 # For small screens, allow to toggle side menu
+SCREEN_SMALL = 768
 $(document).on 'click', '.dropdown-header', (event) ->
-  if $(window).width() < 768
+  if $(window).width() < SCREEN_SMALL
     $(this).nextAll('ul,li').toggle()
 
 $(window).off('resize.rails_admin').on 'resize.rails_admin', (event) ->
-  if $(window).width() >= 768
+  if $(window).width() >= SCREEN_SMALL
     $('.dropdown-header').nextAll('ul,li').show()
 
 # Make link click feel more like native app navigation
@@ -120,3 +116,7 @@ $(document).on 'click', 'a.pjax', (event) ->
 
 $(document).on 'click', '.nav.nav-pills li', (event) ->
   $(this).addClass('active');
+
+# Infinite pjax timeout
+$(document).on 'pjax:timeout', ->
+  false
