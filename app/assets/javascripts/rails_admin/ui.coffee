@@ -69,6 +69,16 @@ $(document).on 'rails_admin.dom_ready', ->
   $('[formnovalidate]').on 'click', ->
     $(this).closest('form').attr('novalidate', true)
 
+  locale = $('html').attr('lang')
+  translations = JSON.parse($('#js_i18n').attr('data'))
+  RailsAdmin.I18n.init(locale, translations)
+
+  abstract_model = $('#js_abstract_model').attr('data')
+  $('.nav.nav-pills li.active').removeClass('active')
+  $(".nav.nav-pills li[data-model='#{abstract_model}']").addClass('active')
+
+  eval $('#js_ordered_filters').attr('data')
+
 $(document).on 'click', '#fields_to_export label input#check_all', () ->
   elems = $('#fields_to_export label input')
   if $('#fields_to_export label input#check_all').is ':checked'

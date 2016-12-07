@@ -6,12 +6,11 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     %meta{content: "NONE,NOARCHIVE", name: "robots"}
     = csrf_meta_tag
+    = javascript_include_tag "rails_admin/rails_admin.js", async: true
     = stylesheet_link_tag "rails_admin/rails_admin.css", media: :all
-    = javascript_include_tag "rails_admin/rails_admin.js"
-    -# Initialize JS simple i18n
-    :javascript
-      RailsAdmin.I18n.init('#{I18n.locale}', JSON.parse("#{j I18n.t("admin.js").to_json}"))
   %body.rails_admin
+    #js_i18n{data: I18n.t("admin.js").to_json}
+
     %nav.navbar.navbar-default.navbar-fixed-top
       = render "layouts/rails_admin/navigation"
     .container-fluid

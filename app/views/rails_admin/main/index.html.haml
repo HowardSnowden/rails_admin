@@ -25,18 +25,11 @@
         %b.caret
       %ul.dropdown-menu#filters{style: 'left:auto; right:0;'}
         - filterable_fields.each do |field|
-          - field_options = case field.type
-          - when :enum
-            - options_for_select(field.with(object: @abstract_model.model.new).enum)
-          - else
-            - ''
+          - field_options = field.type == :enum ? options_for_select(field.with(object: @abstract_model.model.new).enum) : ''
           %li
             %a{href: '#', :"data-field-label" => field.label, :"data-field-name" => field.name, :"data-field-options" => field_options.html_safe, :"data-field-type" => field.type, :"data-field-value" => "", :"data-field-datetimepicker-format" => (field.try(:parser) && field.parser.to_momentjs)}= capitalize_first_letter(field.label)
 
-:javascript
-  jQuery(function($) {
-  #{ordered_filter_string}
-  });
+#js_ordered_filters{data: ordered_filter_string}
 
 %style
   - properties.select{ |p| p.column_width.present? }.each do |property|
