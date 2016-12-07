@@ -13,6 +13,7 @@ require 'bootswatch-rails'
 require 'twitter-typeahead-rails'
 require 'bootstrap_datetimepicker_sass'
 require 'nprogress-rails'
+require 'roboto_fontface_rails'
 
 module RailsAdmin
   class Engine < Rails::Engine

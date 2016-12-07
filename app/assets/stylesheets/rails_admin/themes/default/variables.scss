@@ -14,4 +14,7 @@
 // Navbar too big
 $navbar-height: 48px;
 
+// Use Roboto fontface from the gem
+$web-font-path: asset-path("roboto-fontface/css/roboto/sass/roboto-fontface");
+
 @import "bootswatch/paper/variables";
