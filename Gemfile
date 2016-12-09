@@ -52,3 +52,5 @@ group :test do
 end
 
 gemspec
+
+gem 'pjax_rails', github: 'rails/pjax_rails'

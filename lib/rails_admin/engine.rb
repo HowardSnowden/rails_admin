@@ -14,6 +14,7 @@ require 'twitter-typeahead-rails'
 require 'bootstrap_datetimepicker_sass'
 require 'nprogress-rails'
 require 'roboto_fontface_rails'
+require 'pjax_rails'
 
 module RailsAdmin
   class Engine < Rails::Engine
@@ -39,6 +40,11 @@ module RailsAdmin
       if Rails.env.development?
         RailsAdmin::Config.reset
         load "#{Rails.root}/config/initializers/rails_admin.rb"
+      end
+
+      # skip pjax_rails added callbacks
+      ActionController::Base.send :define_method, :pjax_request? do
+        false
       end
     end
 
