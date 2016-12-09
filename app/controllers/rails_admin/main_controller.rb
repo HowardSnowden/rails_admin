@@ -47,6 +47,13 @@ module RailsAdmin
       params[:return_to].presence && params[:return_to].include?(request.host) && (params[:return_to] != request.fullpath) ? params[:return_to] : index_path
     end
 
+    def index_path(*args, **options)
+      unless options.has_key?(:model_name) || !params.has_key?(:model_name)
+        options[:model_name] = params[:model_name]
+      end
+      super(*args, **options)
+    end
+
     def get_sort_hash(model_config)
       abstract_model = model_config.abstract_model
       params[:sort] = params[:sort_reverse] = nil unless model_config.list.fields.collect { |f| f.name.to_s }.include? params[:sort]
