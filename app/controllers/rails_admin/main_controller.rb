@@ -47,11 +47,13 @@ module RailsAdmin
       params[:return_to].presence && params[:return_to].include?(request.host) && (params[:return_to] != request.fullpath) ? params[:return_to] : index_path
     end
 
-    def index_path(*args, **options)
-      unless options.has_key?(:model_name) || !params.has_key?(:model_name)
-        options[:model_name] = params[:model_name]
+    %w[index new edit].each do |action|
+      define_method "#{action}_path" do |*args, **options|
+        unless options.has_key?(:model_name) || !params.has_key?(:model_name)
+          options[:model_name] = params[:model_name]
+        end
+        super(*args, **options)
       end
-      super(*args, **options)
     end
 
     def get_sort_hash(model_config)
