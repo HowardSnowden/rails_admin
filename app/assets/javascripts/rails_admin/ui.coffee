@@ -134,10 +134,12 @@ $(document).on 'pjax:timeout', ->
 # Load progress bar only if wait time is over 500ms
 progress_bar_timeout = null
 $(document).on 'pjax:send', ->
-  progress_bar_timeout = setTimeout(->
-    NProgress.start()
-  , 500)
+  unless progress_bar_timeout?
+    progress_bar_timeout = setTimeout(->
+      NProgress.start()
+    , 500)
 
 $(document).on 'pjax:complete', ->
   NProgress.done()
   clearTimeout(progress_bar_timeout)
+  progress_bar_timeout = null
