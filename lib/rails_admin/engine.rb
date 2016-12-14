@@ -16,6 +16,10 @@ require 'nprogress-rails'
 require 'roboto_fontface_rails'
 require 'pjax_rails'
 
+if Rails.env.development?
+  require 'query_diet'
+end
+
 module RailsAdmin
   class Engine < Rails::Engine
     isolate_namespace RailsAdmin
