@@ -48,6 +48,9 @@ $(document).on 'click', 'form .tab-content .tab-pane a.remove_nested_one_fields'
     siblings('i').toggleClass('icon-check icon-trash')
 
 $(document).ready ->
+  locale = $('html').attr('lang')
+  translations = JSON.parse($('#js_i18n').attr('data'))
+  RailsAdmin.I18n.init(locale, translations)
   $(document).trigger('rails_admin.dom_ready')
 
 $(document).on 'pjax:end', ->
@@ -68,10 +71,6 @@ $(document).on 'rails_admin.dom_ready', ->
   # https://github.com/rails/jquery-ujs/issues/316
   $('[formnovalidate]').on 'click', ->
     $(this).closest('form').attr('novalidate', true)
-
-  locale = $('html').attr('lang')
-  translations = JSON.parse($('#js_i18n').attr('data'))
-  RailsAdmin.I18n.init(locale, translations)
 
   abstract_model = $('#js_abstract_model').attr('data')
   $('.nav.nav-pills li.active').removeClass('active')
