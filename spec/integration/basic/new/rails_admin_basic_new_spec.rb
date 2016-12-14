@@ -8,10 +8,6 @@ describe 'RailsAdmin Basic New', type: :request do
       visit new_path(model_name: 'player')
     end
 
-    it "shows \"New Model\"" do
-      is_expected.to have_content('New Player')
-    end
-
     it "shows required fields as \"Required\"" do
       is_expected.to have_selector('div', text: /Name\s*Required/)
       is_expected.to have_selector('div', text: /Number\s*Required/)

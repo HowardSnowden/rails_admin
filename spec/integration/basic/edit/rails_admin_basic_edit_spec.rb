@@ -9,10 +9,6 @@ describe 'RailsAdmin Basic Edit', type: :request do
       visit edit_path(model_name: 'player', id: @player.id)
     end
 
-    it "shows \"Edit model\"" do
-      is_expected.to have_content('Edit Player')
-    end
-
     it "shows required fields as \"Required\"" do
       is_expected.to have_selector('div', text: /Name\s*Required/)
       is_expected.to have_selector('div', text: /Number\s*Required/)

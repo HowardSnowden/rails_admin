@@ -11,7 +11,6 @@ describe 'RailsAdmin Basic Show', type: :request do
       is_expected.to have_selector('a', text: 'History')
       is_expected.to have_selector('a', text: 'Edit')
       is_expected.to have_selector('a', text: 'Delete')
-      is_expected.to have_content('Details')
       is_expected.to have_content('Name')
       is_expected.to have_content(@player.name)
       is_expected.to have_content('Number')

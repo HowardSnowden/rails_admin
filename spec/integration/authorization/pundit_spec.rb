@@ -37,12 +37,14 @@ describe 'RailsAdmin Pundit Authorization', type: :request do
     end
 
     it 'GET /admin/team should raise Pundit::NotAuthorizedError' do
-      expect { visit index_path(model_name: 'team') }.to raise_error(Pundit::NotAuthorizedError)
+      visit index_path(model_name: 'team')
+      is_expected.to have_content(I18n.t('admin.flash.not_allowed'))
     end
 
     it 'GET /admin/player/1/edit should raise access denied' do
       @player = FactoryGirl.create :player
-      expect { visit edit_path(model_name: 'player', id: @player.id) }.to raise_error(Pundit::NotAuthorizedError)
+      visit edit_path(model_name: 'player', id: @player.id)
+      is_expected.to have_content(I18n.t('admin.flash.not_allowed'))
     end
   end
 

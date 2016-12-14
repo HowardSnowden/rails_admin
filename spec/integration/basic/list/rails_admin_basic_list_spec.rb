@@ -32,7 +32,6 @@ describe 'RailsAdmin Basic List', type: :request do
       RailsAdmin.config.default_items_per_page = 1
       2.times { FactoryGirl.create :player } # two pages of players
       visit index_path(model_name: 'player')
-      is_expected.to have_content('List of Players')
       is_expected.to have_content('Created at')
       is_expected.to have_content('Updated at')
 
@@ -302,7 +301,7 @@ describe 'RailsAdmin Basic List', type: :request do
         value: '',
         operator: nil,
       }
-      expect(response.body).to include("$.filters.append(#{options.to_json});")
+      expect(response.body).to include("$.filters.append(#{CGI::escapeHTML options.to_json});")
 
       options = {
         index: 2,
@@ -312,7 +311,7 @@ describe 'RailsAdmin Basic List', type: :request do
         value: '',
         operator: nil,
       }
-      expect(response.body).to include("$.filters.append(#{options.to_json});")
+      expect(response.body).to include("$.filters.append(#{CGI::escapeHTML options.to_json});")
     end
   end
 
