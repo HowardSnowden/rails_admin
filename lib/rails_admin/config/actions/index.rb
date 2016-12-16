@@ -60,7 +60,6 @@ module RailsAdmin
                 else
                   render json: output, root: false
                 end
-                GC.start
               end
 
               format.xml do
@@ -70,7 +69,6 @@ module RailsAdmin
                 else
                   render xml: output
                 end
-                GC.start
               end
 
               format.csv do
@@ -84,7 +82,6 @@ module RailsAdmin
                 else
                   render text: output
                 end
-                GC.start
               end
             end
           end
