@@ -6,7 +6,7 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     %meta{content: "NONE,NOARCHIVE", name: "robots"}
     = csrf_meta_tag
-    = javascript_include_tag "rails_admin/rails_admin.js", async: true
+    = javascript_include_tag "rails_admin/rails_admin.js", defer: true
     = stylesheet_link_tag "rails_admin/rails_admin.css", media: :all
   %body.rails_admin
     #js_i18n{data: I18n.t("admin.js").to_json}
