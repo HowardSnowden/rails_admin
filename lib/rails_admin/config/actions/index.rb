@@ -33,10 +33,10 @@ module RailsAdmin
             unless @scopes.empty?
               if params[:scope].blank?
                 unless @scopes.first.nil?
-                  @objects = @objects.send(@scopes.first)
+                  @objects = @objects.public_send(@scopes.first)
                 end
               elsif @scopes.collect(&:to_s).include?(params[:scope])
-                @objects = @objects.send(params[:scope].to_sym)
+                @objects = @objects.public_send(params[:scope].to_sym)
               end
             end
 
