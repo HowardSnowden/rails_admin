@@ -78,6 +78,10 @@ module RailsAdmin
       # yell about fields that are not marked as accessible
       attr_accessor :yell_for_non_accessible_fields
 
+      # use a specific model as root path instead of the dashboard
+      # ex.: config.root_model_name = 'module_name~model_name'
+      attr_accessor :root_model_name
+
       # Setup authentication to be run as a before filter
       # This is run inside the controller instance so you can setup any authentication you need to
       #
@@ -288,6 +292,7 @@ module RailsAdmin
         @navigation_static_links = {}
         @navigation_static_label = nil
         @parent_controller = '::ActionController::Base'
+        @root_model_name = nil
         RailsAdmin::Config::Actions.reset
       end
 
