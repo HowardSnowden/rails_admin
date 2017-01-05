@@ -69,7 +69,7 @@ module RailsAdmin
     end
 
     def to_param
-      @model_name.split('::').collect(&:underscore).join('~')
+      model.to_admin_param
     end
 
     def param_key
