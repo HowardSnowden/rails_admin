@@ -1,8 +1,6 @@
 ActiveSupport.on_load(:active_record) do
   module ActiveRecord
     class Base
-      delegate :to_admin_param, to: :class
-
       def self.rails_admin(&block)
         RailsAdmin.config(self, &block)
       end
