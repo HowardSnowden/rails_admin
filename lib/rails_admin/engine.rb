@@ -15,6 +15,7 @@ require 'bootstrap_datetimepicker_sass'
 require 'nprogress-rails'
 require 'roboto_fontface_rails'
 require 'pjax_rails'
+require 'amoeba'
 
 if Rails.env.development?
   require 'query_diet'

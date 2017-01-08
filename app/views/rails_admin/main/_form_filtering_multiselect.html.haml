@@ -6,7 +6,7 @@
   if form.object.new_record? && related_id.present? && related_id != 'new'
     selected = [config.abstract_model.get(related_id)]
   else
-    selected = form.object.send(field.name)
+    selected = form.object.send(field.name).presence || form.object.try("cloned_#{field.name}") || []
   end
   selected_ids = selected.map{|s| s.send(field.associated_primary_key)}
 

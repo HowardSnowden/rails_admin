@@ -114,6 +114,9 @@ en:
         title: "History for %{model_label} '%{object_label}'"
         menu: "History"
         breadcrumb: "History"
+      clone:
+        menu: "Copy"
+        breadcrumb: "Copy"
     form:
       cancel: "Cancel"
       basic_info: "Basic info"
