@@ -82,6 +82,21 @@ module RailsAdmin
       # ex.: config.root_model_name = 'module_name~model_name'
       attr_accessor :root_model_name
 
+      # use concerns with rails_admin config blocks for each model
+      # ex.: config.with_admin_concerns = true # or :reverse to include modules in reverse order
+      # in app/models/admin/model_name.rb:
+      #
+      # module Admin::ModelName
+      #   extend ActiveSupport::Concern
+      #
+      #   included do
+      #      rails_admin do
+      #        # configurations here
+      #      end
+      #   end
+      # end
+      attr_accessor :with_admin_concerns
+
       # Setup authentication to be run as a before filter
       # This is run inside the controller instance so you can setup any authentication you need to
       #
@@ -293,6 +308,7 @@ module RailsAdmin
         @navigation_static_label = nil
         @parent_controller = '::ActionController::Base'
         @root_model_name = nil
+        @with_admin_concerns = nil
         RailsAdmin::Config::Actions.reset
       end
 

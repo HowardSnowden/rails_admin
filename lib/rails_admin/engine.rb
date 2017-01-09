@@ -51,6 +51,20 @@ module RailsAdmin
       ActionController::Base.send :define_method, :pjax_request? do
         false
       end
+
+      if RailsAdmin.config.with_admin_concerns
+        (Rails::Engine.subclasses.map(&:root) << Rails.root).each do |root|
+          files = Dir[root.join('app', 'models', 'admin', '**', '*.rb')]
+          if RailsAdmin.config.with_admin_concerns.to_s == 'reverse'
+            files = files.reverse
+          end
+          files.each do |name|
+            model = name.match(/app\/models\/admin\/(.+)\.rb/)[1].camelize.constantize
+            model.include Admin
+            model.include "Admin::#{model.name}".constantize
+          end
+        end
+      end
     end
 
     rake_tasks do
