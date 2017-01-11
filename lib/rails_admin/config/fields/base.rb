@@ -331,6 +331,21 @@ module RailsAdmin
         def form_value
           form_default_value.nil? ? formatted_value : form_default_value
         end
+
+        def model
+          bindings[:object]
+        end
+        alias_method :m, :model
+
+        def view
+          bindings[:view]
+        end
+        alias_method :v, :view
+
+        def controller
+          bindings[:controller]
+        end
+        alias_method :c, :controller
       end
     end
   end
