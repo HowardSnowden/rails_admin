@@ -99,6 +99,18 @@
             var input = widget.element.find('.filtering-select').children('.ra-filtering-select-input');
             input.val(json.label);
             if (!select.find('option[value=' + json.id + ']').length) { // not a replace
+              var context = $(select.context);
+              context.find('select > option:selected').each(function(index, element){
+                $(element).removeAttr('selected');
+              });
+              context.find('select').append(option);
+              // re-initialize the associated filteringSelect widget
+              var filteringSelect = context.find(':ra-filteringSelect');
+              if(filteringSelect.length){
+                filteringSelect = window.ra_widgets[filteringSelect.attr('id')];
+                filteringSelect._setOptionsSource();
+                filteringSelect._initAutocomplete();
+              }
               select.html(option).val(json.id);
               widget.element.find('.update').removeClass('disabled');
             }

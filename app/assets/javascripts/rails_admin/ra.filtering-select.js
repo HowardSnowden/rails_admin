@@ -16,6 +16,8 @@
 (function($) {
   'use strict';
 
+  window.ra_widgets = window.ra_widgets || {};
+
   $.widget('ra.filteringSelect', {
     options: {
       createQuery: function(query) {
@@ -33,6 +35,8 @@
     select: null,
 
     _create: function() {
+      window.ra_widgets[this.element.attr('id')] = this;
+
       var filtering_select = this.element.siblings(
         '[data-input-for="' + this.element.attr('id') + '"]'
       );
@@ -281,6 +285,7 @@
       this.input.remove();
       this.button.remove();
       this.element.show();
+      delete window.ra_widgets[this.element.attr('id')];
       $.Widget.prototype.destroy.call(this);
     }
   });
