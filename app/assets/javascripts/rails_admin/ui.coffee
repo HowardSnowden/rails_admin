@@ -143,49 +143,7 @@ $(document).on 'pjax:complete', ->
   clearTimeout(progress_bar_timeout)
   progress_bar_timeout = null
 
-# Edit inline
-$(document).on 'click', '.js_edit_inline_text', (event) ->
-  cell = $(this).next('.js_edit_inline_input')
-  cell.show()
-  cell.find('input').focus()
-  $(this).hide()
-
-$(document).on 'blur', '.js_edit_inline_input', (event) ->
-  data = $(this).data()
-  root = location.pathname.replace(data.model, '')
-  url = "#{root}#{data.model}/#{data.id}/edit.js?inline=true"
-  field = "#{data.model.replace('~', '_')}[#{data.name}]"
-  input = $(this).find('input')
-  cell = $(this).prev('.js_edit_inline_text')
-  value =
-    switch input.attr('type')
-      when 'checkbox'
-        input.is(':checked')
-      else
-        input.val()
-  if "#{value}" == input.attr('value')
-    cell.removeClass('edit_inline_error')
-    cell.show()
-    $(this).hide()
-    return
-  form = {
-    "#{field}": value
-  }
-  if (csrf_token = $('meta[name=csrf-token]').attr('content'))?
-    form.authenticity_token = csrf_token
-  $.ajax(
-    url: url
-    type: 'PUT'
-    data: form
-    dataType: 'text'
-    success: (data, status, xhr) ->
-      data = JSON.parse(data)
-      cell.html(data.title)
-      cell.attr('title', cell.text())
-      cell.removeClass('edit_inline_error')
-      input.attr('value', data.value)
-    error: (xhr, status, error) ->
-      cell.addClass('edit_inline_error')
-  )
-  cell.show()
-  $(this).hide()
+# Widgets
+for name, widget of RA
+  if /Widget$/.test(name) && name != 'BaseWidget'
+    new widget

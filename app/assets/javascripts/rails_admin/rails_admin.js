@@ -21,5 +21,6 @@
 //= require rails_admin/ra.nested-form-hooks
 //= require rails_admin/ra.i18n
 //= require rails_admin/ra.widgets
+//= require rails_admin/index
 //= require rails_admin/ui
 //= require rails_admin/custom/ui
