@@ -16,6 +16,7 @@ require 'nprogress-rails'
 require 'roboto_fontface_rails'
 require 'pjax_rails'
 require 'amoeba'
+require 'ext_ruby'
 
 if Rails.env.development?
   require 'query_diet'

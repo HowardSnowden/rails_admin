@@ -318,6 +318,36 @@ body.rails_admin {
     th.item {
       width:60px;
     }
+
+    // Force baseline alignment when th are multilines
+    .table {
+      > thead > tr > th {
+        vertical-align: baseline;
+      }
+    }
+  }
+
+  // Do not break on mobile when table is too wide
+  #bulk_form {
+    overflow-x: auto;
+    padding-right: 15px;
+  }
+
+  .js_edit_inline_text {
+    box-shadow: 0px 0px 0px 4px $gray-lighter inset;
+    cursor: pointer;
+  }
+
+  .js_edit_inline_input {
+    display: none;
+    cursor: inherit;
+    input {
+      width: 100%;
+    }
+  }
+
+  .edit_inline_error {
+    box-shadow: 0px 0px 0px 4px $brand-danger inset;
   }
 }
 
@@ -337,19 +367,6 @@ body.rails_admin {
       bottom: 0;
       overflow-y: auto;
     }
-  }
-}
-
-// Do not break on mobile when table is too wide
-#bulk_form {
-  overflow-x: auto;
-  padding-right: 15px;
-}
-
-// Force baseline alignment when th are multilines
-.table {
-  & > thead > tr > th {
-    vertical-align: baseline;
   }
 }
 

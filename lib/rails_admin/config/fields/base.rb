@@ -346,6 +346,10 @@ module RailsAdmin
           bindings[:controller]
         end
         alias_method :c, :controller
+
+        register_instance_option :edit_inline do
+          false
+        end
       end
     end
   end

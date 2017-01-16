@@ -80,5 +80,18 @@ module RailsAdmin
         %{$.filters.append(#{options.to_json});}
       end.join("\n").html_safe if ordered_filters
     end
+
+    def edit_inline_tag(object, property, data)
+      name_attr = "#{data[:model].tr('~', '_')}[#{data[:id]}][#{data[:name]}]"
+      id_attr = name_attr.tr('[]', '_').sub(/__/, '_').sub(/_$/, '')
+      value_attr = object.send(property.name)
+
+      case property.type
+      when :boolean
+        send "#{property.view_helper}_tag", name_attr, value_attr, value_attr, id: id_attr
+      else
+        send "#{property.view_helper}_tag", name_attr, value_attr, id: id_attr
+      end
+    end
   end
 end

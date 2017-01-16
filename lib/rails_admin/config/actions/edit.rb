@@ -24,7 +24,8 @@ module RailsAdmin
             elsif request.put? # UPDATE
               sanitize_params_for!(request.xhr? ? :modal : :update)
 
-              @object.set_attributes(params[@abstract_model.param_key])
+              attributes = params[@abstract_model.param_key]
+              @object.set_attributes(attributes)
               @authorization_adapter && @authorization_adapter.attributes_for(:update, @abstract_model).each do |name, value|
                 @object.send("#{name}=", value)
               end
@@ -33,7 +34,15 @@ module RailsAdmin
                 @auditing_adapter && @auditing_adapter.update_object(@object, @abstract_model, _current_user, changes)
                 respond_to do |format|
                   format.html { redirect_to_on_success }
-                  format.js { render json: {id: @object.id.to_s, label: @model_config.with(object: @object).object_label} }
+                  format.js do
+                    if params[:inline].to_b
+                      field_name, field_value = attributes.to_h.first
+                      field = @model_config.list.with(controller: self, object: @object).visible_fields.find{ |f| f.name == field_name.to_sym }
+                      render json: {title: field.pretty_value, value: field_value}
+                    else
+                      render json: {id: @object.id.to_s, label: @model_config.with(object: @object).object_label}
+                    end
+                  end
                 end
               else
                 handle_save_error :edit

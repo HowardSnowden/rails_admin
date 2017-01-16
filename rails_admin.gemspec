@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pjax_rails', '~> 0.4'
   spec.add_dependency 'query_diet', '~> 0.6'
   spec.add_dependency 'amoeba', '~> 3.0'
+  spec.add_dependency 'ext_ruby', '~> 0.2'
   spec.add_development_dependency 'bundler', '~> 1.0'
   spec.authors = ['Erik Michaels-Ober', 'Bogdan Gaza', 'Petteri Kaapa', 'Benoit Benezech', 'Mitsuhiro Shibuya']
   spec.description = 'RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data.'
