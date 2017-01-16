@@ -65,6 +65,10 @@ body.rails_admin {
   /* fat labels in forms */
   .label.form-label {
     padding: 7px 7px 8px 7px;
+    // fix for ordered filters in index view
+    .delete {
+      color: $label-color;
+    }
   }
 
   /* new/edit/export forms */
