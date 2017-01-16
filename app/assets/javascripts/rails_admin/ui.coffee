@@ -178,12 +178,12 @@ $(document).on 'blur', '.js_edit_inline_input', (event) ->
     type: 'PUT'
     data: form
     dataType: 'text'
-    success: (data, status, xhr) =>
+    success: (data, status, xhr) ->
       data = JSON.parse(data)
       cell.html(data.title)
       cell.attr('title', cell.text())
       cell.removeClass('edit_inline_error')
-      $(this).attr('value', data.value)
+      input.attr('value', data.value)
     error: (xhr, status, error) ->
       cell.addClass('edit_inline_error')
   )
