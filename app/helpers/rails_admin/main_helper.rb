@@ -82,8 +82,9 @@ module RailsAdmin
     end
 
     def edit_inline_tag(object, property, data)
-      name_attr = "#{data[:model].tr('~', '_')}[#{data[:id]}][#{data[:name]}]"
-      id_attr = name_attr.tr('[]', '_').sub(/__/, '_').sub(/_$/, '')
+      model_name = data[:model].tr('~', '_')
+      name_attr = "#{model_name}[#{data[:id]}][#{data[:name]}]"
+      id_attr = "#{model_name}_#{data[:id]}_#{data[:name]}"
       value_attr = object.send(property.name)
 
       case property.type
