@@ -145,7 +145,7 @@ $(document).on 'pjax:complete', ->
 
 # Widgets
 widget_initializers = []
-for widget_name, widget_class of RA
+for widget_name, widget_class of RailsAdmin
   if /Widget$/.test(widget_name) && widget_name != 'BaseWidget'
     widget = new widget_class
     widget_initializers.push(widget) if widget.ready?

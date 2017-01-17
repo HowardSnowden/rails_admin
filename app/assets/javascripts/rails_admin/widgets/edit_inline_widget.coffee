@@ -1,4 +1,4 @@
-class RA.EditInlineWidget extends RA.BaseWidget
+class RailsAdmin.EditInlineWidget extends RailsAdmin.BaseWidget
   constructor: ->
     @text_element = '.js_edit_inline_text'
     @input_element = '.js_edit_inline_input'
