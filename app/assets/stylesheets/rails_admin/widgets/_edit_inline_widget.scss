@@ -1,9 +1,4 @@
 body.rails_admin {
-  .js_edit_inline_text {
-    box-shadow: 0px 0px 0px 4px $gray-lighter inset;
-    cursor: pointer;
-  }
-
   .js_edit_inline_input {
     display: none;
     cursor: inherit;
@@ -12,7 +7,12 @@ body.rails_admin {
     }
   }
 
-  .edit_inline_error {
+  .js_edit_inline_text {
+    box-shadow: 0px 0px 0px 4px $gray-lighter inset;
+    cursor: pointer;
+  }
+
+  .js_edit_inline_error {
     box-shadow: 0px 0px 0px 4px $brand-danger inset;
   }
 }

@@ -2,6 +2,10 @@ class RA.EditInlineWidget extends RA.BaseWidget
   constructor: ->
     @text_element = '.js_edit_inline_text'
     @input_element = '.js_edit_inline_input'
+
+  ready: =>
+    $(@input_element).each (index, element) ->
+      $(element).prev().addClass('js_edit_inline_text')
     @_bind_text_element()
     @_bind_input_element()
 
@@ -9,7 +13,7 @@ class RA.EditInlineWidget extends RA.BaseWidget
     $(document).on 'click', @text_element, (event) =>
       element = @element_of(event)
 
-      input_wrapper = element.next(@input_element)
+      input_wrapper = element.next()
       input_wrapper.show()
       input_wrapper.find('input').focus()
       element.hide()
@@ -18,11 +22,11 @@ class RA.EditInlineWidget extends RA.BaseWidget
     $(document).on 'blur', @input_element, (event) =>
       [element, options] = @element_and_options_of(event)
 
-      text_wrapper = element.prev(@text_element)
+      text_wrapper = element.prev()
       input = element.find('input')
       form = @_build_form(input, text_wrapper, options)
       unless form?
-        text_wrapper.removeClass('edit_inline_error')
+        text_wrapper.removeClass('js_edit_inline_error')
         text_wrapper.show()
         element.hide()
         return
@@ -56,10 +60,10 @@ class RA.EditInlineWidget extends RA.BaseWidget
         data = JSON.parse(data)
         text_wrapper.html(data.title)
         text_wrapper.attr('title', text_wrapper.text())
-        text_wrapper.removeClass('edit_inline_error')
+        text_wrapper.removeClass('js_edit_inline_error')
         input.attr('value', data.value)
       error: (xhr, status, error) ->
-        text_wrapper.addClass('edit_inline_error')
+        text_wrapper.addClass('js_edit_inline_error')
     )
 
   _extract_url: (options) ->

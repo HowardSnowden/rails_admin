@@ -144,6 +144,11 @@ $(document).on 'pjax:complete', ->
   progress_bar_timeout = null
 
 # Widgets
-for name, widget of RA
-  if /Widget$/.test(name) && name != 'BaseWidget'
-    new widget
+widget_initializers = []
+for widget_name, widget_class of RA
+  if /Widget$/.test(widget_name) && widget_name != 'BaseWidget'
+    widget = new widget_class
+    widget_initializers.push(widget) if widget.ready?
+$(document).on 'rails_admin.dom_ready', ->
+  for widget in widget_initializers
+    widget.ready()

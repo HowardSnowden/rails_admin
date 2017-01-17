@@ -90,14 +90,8 @@
               %td.other.left= link_to "...", @other_left_link, class: 'pjax'
             - properties.map{ |property| property.bind(:object, object) }.each do |property|
               - value = property.pretty_value
-              - class_attr = [property.css_class, property.type_css_class]
-              - if !property.edit_inline?
-                %td{class: class_attr, title: strip_tags(value.to_s)}= value
-              - else
-                %td{class: class_attr + ['js_edit_inline_text'], title: strip_tags(value.to_s)}= value
-                - data_attr = {model: object.class.to_admin_param, id: object.id, name: property.name}
-                %td{class: class_attr + ['js_edit_inline_input'], data: data_attr}
-                  = edit_inline_tag(object, property, data_attr)
+              %td{class: [property.css_class, property.type_css_class], title: strip_tags(value.to_s)}= value
+              = edit_inline_widget(object, property) if property.edit_inline?
             - if @other_right_link ||= other_right && index_path(params.merge(set: (params[:set].to_i + 1)))
               %td.other.right= link_to "...", @other_right_link, class: 'pjax'
             %td.last.links
