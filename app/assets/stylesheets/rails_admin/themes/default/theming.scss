@@ -10,7 +10,7 @@
   body { background-color: $link-color; }
 */
 
-@import "bootswatch/paper/bootswatch";
+@import "bootswatch/paper/bootswatch"; // TODO: change bootswatch to not import by url
 
 // Some font-size are a little bit too big
 #block-tables h2,
@@ -29,4 +29,11 @@
 .breadcrumb,
 .alert {
   margin-top: 15px;
+}
+
+// Pagination buttons were cut
+.pagination,
+.show-all,
+.total-count {
+  margin-left: 1px;
 }

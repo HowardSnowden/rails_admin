@@ -25,6 +25,10 @@ module RailsAdmin
         register_instance_option :scopes do
           []
         end
+
+        register_instance_option :infinite_scroll? do
+          false
+        end
       end
     end
   end

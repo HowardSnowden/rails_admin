@@ -53,11 +53,12 @@ class RailsAdmin.EditInlineWidget extends RailsAdmin.BaseWidget
   _send_form: (input, text_wrapper, form, options) =>
     $.ajax(
       url: @_extract_url(options)
-      type: 'PUT'
+      method: 'PUT'
       data: form
-      dataType: 'text'
+      dataType: 'json'
+      beforeSend: (xhr) ->
+        xhr.setRequestHeader("Accept", "text/javascript")
       success: (data, status, xhr) ->
-        data = JSON.parse(data)
         text_wrapper.html(data.title)
         text_wrapper.attr('title', text_wrapper.text())
         text_wrapper.removeClass('js_edit_inline_error')
@@ -68,4 +69,4 @@ class RailsAdmin.EditInlineWidget extends RailsAdmin.BaseWidget
 
   _extract_url: (options) ->
     root = location.pathname.replace(options.model, '')
-    "#{root}#{options.model}/#{options.id}/edit.js?inline=true"
+    "#{root}#{options.model}/#{options.id}/edit?inline=true"

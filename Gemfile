@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+
 gem 'appraisal', '>= 2.0'
 gem 'devise'
 
@@ -54,3 +60,4 @@ end
 gemspec
 
 gem 'pjax_rails', github: 'rails/pjax_rails'
+gem 'kaminari', github: 'patleb/kaminari', branch: '0-17-stable'

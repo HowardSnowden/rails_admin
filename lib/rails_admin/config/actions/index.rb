@@ -45,6 +45,10 @@ module RailsAdmin
                 render @action.template_name, status: @status_code || :ok
               end
 
+              format.js do
+                render @action.template_name
+              end
+
               format.json do
                 output = begin
                   if params[:compact]

@@ -21,5 +21,11 @@ module RailsAdmin
         end
       end
     end
+
+    def infinite_scroll_widget
+      content_tag :li, class: ['next', 'js_infinite_scroll'] do
+        link_to t('admin.widgets.infinite_scroll.more'), '#', class: 'btn btn-default'
+      end
+    end
   end
 end

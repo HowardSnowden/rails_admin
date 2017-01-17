@@ -2,3 +2,4 @@
   %li.next.disabled= link_to raw(t 'admin.pagination.next'), '#'
 - else
   %li.next= link_to raw(t 'admin.pagination.next'), url, class: (remote ? 'pjax' : '')
+= infinite_scroll_widget if @model_config.list.infinite_scroll?
