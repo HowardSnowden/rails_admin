@@ -138,7 +138,9 @@ module RailsAdmin
 
     # parent => :root, :collection, :member
     def menu_for(parent, abstract_model = nil, object = nil, only_icon = false) # perf matters here (no action view trickery)
-      actions = actions(parent, abstract_model, object).select { |a| a.http_methods.include?(:get) }
+      actions = actions(parent, abstract_model, object).select do |action|
+        action.http_methods.include?(:get) && !action.class.name.ends_with?('::Export')
+      end
       actions.collect do |action|
         wording = wording_for(:menu, action)
         %(
